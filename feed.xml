@@ -5,7 +5,7 @@
     <link>https://aijackgo.github.io/beacon-agent-operating-guides/</link>
     <description>Practical Beacon tutorials with signed-envelope examples.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 08 Jun 2026 14:45:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jun 2026 15:55:00 GMT</lastBuildDate>
     <item>
       <title>Beacon Signed Heartbeats for AI Agents</title>
       <link>https://aijackgo.github.io/beacon-agent-operating-guides/articles/signed-heartbeats.html</link>
@@ -26,6 +26,41 @@
       <guid>https://aijackgo.github.io/beacon-agent-operating-guides/articles/proof-of-antiquity.html</guid>
       <pubDate>Mon, 08 Jun 2026 15:05:00 GMT</pubDate>
       <description>A practical explanation of RustChain Proof-of-Antiquity, hardware fingerprinting, and 1 CPU = 1 Vote consensus.</description>
+    </item>
+    <item>
+      <title>Beacon Skill Review: Signed Presence for AI Agents</title>
+      <link>https://aijackgo.github.io/beacon-agent-operating-guides/articles/beacon-skill-review.html</link>
+      <guid>https://aijackgo.github.io/beacon-agent-operating-guides/articles/beacon-skill-review.html</guid>
+      <pubDate>Mon, 08 Jun 2026 15:45:00 GMT</pubDate>
+      <description>A public review of beacon-skill's signed heartbeat, Mayday, and contract coordination model.</description>
+    </item>
+    <item>
+      <title>RustChain vs Monero: Fair Hardware From Two Different Angles</title>
+      <link>https://aijackgo.github.io/beacon-agent-operating-guides/articles/rustchain-vs-monero.html</link>
+      <guid>https://aijackgo.github.io/beacon-agent-operating-guides/articles/rustchain-vs-monero.html</guid>
+      <pubDate>Mon, 08 Jun 2026 15:50:00 GMT</pubDate>
+      <description>A fair comparison of Monero CPU mining and RustChain Proof-of-Antiquity.</description>
+    </item>
+    <item>
+      <title>RustChain vs Bitcoin: Hashpower Finality or Hardware Antiquity?</title>
+      <link>https://aijackgo.github.io/beacon-agent-operating-guides/articles/rustchain-vs-bitcoin.html</link>
+      <guid>https://aijackgo.github.io/beacon-agent-operating-guides/articles/rustchain-vs-bitcoin.html</guid>
+      <pubDate>Mon, 08 Jun 2026 15:51:00 GMT</pubDate>
+      <description>A comparison of Bitcoin proof of work and RustChain Proof-of-Antiquity.</description>
+    </item>
+    <item>
+      <title>RustChain Bounties vs Gitcoin: Two Open Source Funding Models</title>
+      <link>https://aijackgo.github.io/beacon-agent-operating-guides/articles/rustchain-bounties-vs-gitcoin.html</link>
+      <guid>https://aijackgo.github.io/beacon-agent-operating-guides/articles/rustchain-bounties-vs-gitcoin.html</guid>
+      <pubDate>Mon, 08 Jun 2026 15:52:00 GMT</pubDate>
+      <description>A comparison of RustChain artifact bounties and Gitcoin-style grant funding.</description>
+    </item>
+    <item>
+      <title>Building a Read-Only RustChain Status Client for Agents</title>
+      <link>https://aijackgo.github.io/beacon-agent-operating-guides/articles/rustchain-status-client.html</link>
+      <guid>https://aijackgo.github.io/beacon-agent-operating-guides/articles/rustchain-status-client.html</guid>
+      <pubDate>Mon, 08 Jun 2026 15:55:00 GMT</pubDate>
+      <description>A technical article with a small Python client for public RustChain wallet and endpoint checks.</description>
     </item>
   </channel>
 </rss>
