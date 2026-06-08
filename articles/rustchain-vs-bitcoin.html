@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RustChain vs Bitcoin: Hashpower Finality or Hardware Antiquity?</title>
+  <meta name="description" content="A fair comparison of Bitcoin proof of work and RustChain Proof-of-Antiquity.">
+  <style>
+    :root { color-scheme: light; --ink: #18202f; --muted: #5c6575; --line: #d8dde8; --panel: #f7f8fb; --accent: #5d5c00; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: #fff; line-height: 1.58; }
+    main { max-width: 880px; margin: 0 auto; padding: 40px 20px 64px; }
+    nav { margin-bottom: 28px; font-size: 14px; }
+    a { color: var(--accent); }
+    h1 { font-size: clamp(34px, 6vw, 54px); line-height: 1.02; margin: 0 0 12px; letter-spacing: 0; }
+    h2 { margin-top: 34px; font-size: 25px; letter-spacing: 0; }
+    p.lede { color: var(--muted); font-size: 19px; margin: 0 0 24px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; }
+    th, td { border: 1px solid var(--line); padding: 9px 10px; vertical-align: top; }
+    th { background: var(--panel); text-align: left; }
+    .meta { color: var(--muted); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 10px 0; font-size: 14px; }
+    .note { background: var(--panel); border-left: 4px solid var(--accent); padding: 14px 16px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+<main>
+  <nav><a href="../index.html">All guides</a> · <a href="../feed.xml">RSS</a></nav>
+  <h1>RustChain vs Bitcoin: Hashpower Finality or Hardware Antiquity?</h1>
+  <p class="lede">Bitcoin made proof of work credible at global scale. RustChain experiments with a much narrower question: can a chain reward real physical hardware identity instead of only rewarding the most hashpower?</p>
+  <p class="meta">Published 2026-06-08 by AIjackgo · RustChain links: <a href="https://rustchain.org">site</a>, <a href="https://rustchain.org/explorer/">explorer</a>, <a href="https://github.com/Scottcjn/Rustchain">GitHub</a></p>
+
+  <h2>Bitcoin's Strength</h2>
+  <p>Bitcoin is the reference point because it proved that an open network can use proof of work, difficulty adjustment, and economic incentives to maintain a shared ledger. The <a href="https://bitcoin.org/bitcoin.pdf">Bitcoin white paper</a> is still concise and powerful: participants expend computation, the longest valid chain becomes the accepted history, and attacking the chain requires controlling enormous work. Bitcoin's security story is simple to explain, hard to duplicate, and backed by years of adversarial pressure.</p>
+  <p>That maturity matters. Bitcoin has liquidity, wallets, infrastructure, mining markets, and a community that treats protocol conservatism as a feature. RustChain does not compete with that track record. It is a smaller experimental network with a different mission. The fair comparison is not "which one is bigger?" Bitcoin wins that immediately. The better comparison is "what kind of resource does each network reward?"</p>
+
+  <h2>Two Definitions of Proof</h2>
+  <table>
+    <tr><th>Dimension</th><th>Bitcoin</th><th>RustChain</th></tr>
+    <tr><td>Primary scarce resource</td><td>Hashpower and electricity.</td><td>Verified physical hardware identity and antiquity.</td></tr>
+    <tr><td>Mining winner</td><td>The operator who contributes competitive proof of work.</td><td>The operator whose real machine passes identity checks and earns under the antiquity model.</td></tr>
+    <tr><td>Hardware incentive</td><td>Specialized ASICs and industrial efficiency.</td><td>Hardware diversity, old-machine preservation, and anti-emulation evidence.</td></tr>
+    <tr><td>Main maturity advantage</td><td>Global liquidity and battle-tested consensus.</td><td>Flexible bounty-driven experimentation and agent-economy integration.</td></tr>
+  </table>
+  <p>Bitcoin rewards work that is intentionally hard to produce. RustChain rewards work tied to the physical facts of a machine. In Bitcoin, a twenty-year-old laptop is irrelevant for mining because it cannot compete with modern ASICs. In RustChain, the same kind of old machine can be interesting precisely because its age and physical uniqueness are part of the point.</p>
+
+  <h2>Energy and Hardware Lifecycle</h2>
+  <p>Bitcoin mining is often defended as a buyer of stranded energy and a disciplined market for electricity. Critics focus on total consumption and ASIC turnover. Both points can be true in different contexts. Bitcoin's proof is intentionally energy-linked; that energy cost is also part of the security budget. The tradeoff is that mining becomes an industrial activity.</p>
+  <p>RustChain's Proof-of-Antiquity moves the conversation toward hardware lifecycle. A preserved old workstation does not need to beat a warehouse of ASICs. It needs to prove it is a real machine with a stable identity. If the network rewards that, old hardware gains a reason to stay maintained. This does not make electricity free or remove operational costs. It changes the incentive from "buy the fastest specialized miner" to "keep diverse real machines online and verifiable."</p>
+
+  <h2>Security Tradeoffs</h2>
+  <p>Bitcoin's attack model is clean: acquire or rent enough hashpower, then attempt to rewrite recent history. RustChain's attack model is messier because hardware identity is messier. An attacker may try VM farms, spoofed CPU claims, cloned identifiers, or artificial timing profiles. The defense is not one magic field. It is repeated multi-signal attestation: CPU and memory shape, timing behavior, device and firmware hints, thermal or drift patterns, and long-term consistency.</p>
+  <p>That makes RustChain more experimental. Hardware fingerprinting can be improved, but it can also be brittle if implemented carelessly. The network must avoid exposing private data while still collecting enough evidence to distinguish real machines. Bitcoin's minimalism is an advantage here. RustChain accepts more complexity to pursue a different kind of decentralization.</p>
+
+  <h2>Use Cases and Culture</h2>
+  <p>Bitcoin's culture is monetary: savings, settlement, censorship resistance, and long-term protocol stability. RustChain's culture is more like a hybrid of retro computing, DePIN, and open-source bounties. The public <a href="https://github.com/Scottcjn/rustchain-bounties">bounty board</a>, Beacon agent coordination, and BoTTube creator experiments make it feel like an ecosystem where software agents and hardware preservation are first-class topics.</p>
+  <p>That difference matters for contributors. A developer who wants to build around global liquidity will probably start with Bitcoin infrastructure. A developer who wants to experiment with physical hardware identity, old machines, or AI-agent earning loops may find RustChain more accessible because the network explicitly rewards those experiments.</p>
+
+  <h2>Conclusion</h2>
+  <p>Bitcoin is stronger as a conservative global monetary network. RustChain is more interesting as an experiment in hardware fairness and physical authenticity. Bitcoin says finality comes from accumulated work. RustChain says participation should also account for the uniqueness and age of real machines. Those are not the same promise. The useful takeaway is that proof mechanisms are political and technical at once: they decide which resources the network treats as valuable.</p>
+  <div class="note">
+    <strong>Disclosure:</strong> This comparison was written as a compensated RustChain bounty submission. It is educational analysis, not investment advice.
+  </div>
+</main>
+</body>
+</html>
