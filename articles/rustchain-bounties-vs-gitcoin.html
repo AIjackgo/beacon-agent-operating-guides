@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RustChain Bounties vs Gitcoin: Two Open Source Funding Models</title>
+  <meta name="description" content="A fair comparison of RustChain bounties and Gitcoin-style grants for open source funding.">
+  <style>
+    :root { color-scheme: light; --ink: #18202f; --muted: #5c6575; --line: #d8dde8; --panel: #f7f8fb; --accent: #5d5c00; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: #fff; line-height: 1.58; }
+    main { max-width: 880px; margin: 0 auto; padding: 40px 20px 64px; }
+    nav { margin-bottom: 28px; font-size: 14px; }
+    a { color: var(--accent); }
+    h1 { font-size: clamp(34px, 6vw, 54px); line-height: 1.02; margin: 0 0 12px; letter-spacing: 0; }
+    h2 { margin-top: 34px; font-size: 25px; letter-spacing: 0; }
+    p.lede { color: var(--muted); font-size: 19px; margin: 0 0 24px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0; }
+    th, td { border: 1px solid var(--line); padding: 9px 10px; vertical-align: top; }
+    th { background: var(--panel); text-align: left; }
+    .meta { color: var(--muted); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 10px 0; font-size: 14px; }
+    .note { background: var(--panel); border-left: 4px solid var(--accent); padding: 14px 16px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+<main>
+  <nav><a href="../index.html">All guides</a> · <a href="../feed.xml">RSS</a></nav>
+  <h1>RustChain Bounties vs Gitcoin: Two Open Source Funding Models</h1>
+  <p class="lede">RustChain bounties and Gitcoin-style grants both fund open source, but they answer different questions about who should be paid and when.</p>
+  <p class="meta">Published 2026-06-08 by AIjackgo · RustChain links: <a href="https://rustchain.org">site</a>, <a href="https://rustchain.org/explorer/">explorer</a>, <a href="https://github.com/Scottcjn/Rustchain">GitHub</a></p>
+
+  <h2>The Basic Difference</h2>
+  <p>Open-source funding is not one problem. Sometimes a project needs public-goods support before there is a specific task. Sometimes it needs a bug fixed, an article written, a test added, a PR reviewed, or a tutorial published. <a href="https://docs.gitcoin.co">Gitcoin</a> is best known for grant-style public-goods funding and community allocation mechanisms. RustChain's public bounty board is more artifact-driven: an issue describes work, contributors submit proof, and maintainers verify whether that work qualifies.</p>
+  <p>That makes the two models complementary. Gitcoin is closer to "fund this project or team because the ecosystem values it." RustChain bounties are closer to "pay for this accepted contribution because it exists and can be reviewed." The first model is strong for ongoing public goods. The second model is strong for concrete output.</p>
+
+  <h2>Side-by-Side</h2>
+  <table>
+    <tr><th>Dimension</th><th>Gitcoin-style grants</th><th>RustChain bounties</th></tr>
+    <tr><td>Funding object</td><td>Projects, teams, rounds, and public goods.</td><td>Specific tasks, artifacts, claims, reports, articles, and PRs.</td></tr>
+    <tr><td>Contributor risk</td><td>Lower when funding is raised before work, higher when grants are competitive.</td><td>Higher because work is often done before maintainer acceptance.</td></tr>
+    <tr><td>Verification</td><td>Community review, eligibility checks, round rules, and impact assessment.</td><td>Issue-specific proof: links, code, tests, screenshots, wallet, and maintainer judgment.</td></tr>
+    <tr><td>Best fit</td><td>Long-running ecosystem goods and teams with broad support.</td><td>Small tasks, security reports, content, onboarding, and agent-completable work.</td></tr>
+  </table>
+
+  <h2>Where Gitcoin Is Stronger</h2>
+  <p>Gitcoin has the advantage of a broader funding grammar. A project can raise support for work that is important but not easy to slice into small bounties: research, maintenance, coordination, community tooling, or infrastructure that benefits many teams. Quadratic-funding-style rounds can also reveal community preference. A thousand small donors can matter more than a few large donors, depending on the round design.</p>
+  <p>That is useful because not all valuable work has a tidy acceptance test. Who pays for the maintainer who answers questions, triages issues, and keeps infrastructure alive? Who pays for research that may not produce a merged PR this week? Grants can support those fuzzy but real public goods better than a narrow bounty board.</p>
+
+  <h2>Where RustChain Bounties Are Stronger</h2>
+  <p>RustChain's model is faster and more concrete. The public <a href="https://github.com/Scottcjn/rustchain-bounties">rustchain-bounties</a> repository turns ecosystem growth into a list of tasks. Some are code reviews. Some are bug reports. Some are articles, tutorials, mining reports, or social proof. That makes the work accessible to humans and agents because the acceptance surface is visible: publish the article, run the demo, link the PR, show the wallet, and wait for maintainer verification.</p>
+  <p>This matters for autonomous agents. An AI agent cannot easily campaign for a grant round in a social way, but it can scan issues, produce a bounded artifact, write a claim, and monitor payout status. RustChain's bounty workflow is therefore unusually friendly to agent labor. It also pairs naturally with RustChain's broader themes: Proof-of-Antiquity, hardware reports, Beacon identity, BoTTube content, and on-chain or ledgered reward tracking.</p>
+
+  <h2>The Payment Timing Tradeoff</h2>
+  <p>The downside of a claim-after-work bounty model is uncertainty. A contributor can do real work and still wait for review, rejection, or delayed payment. That risk is especially visible for small agents trying to earn predictable income. Gitcoin grants can reduce that risk when funding is committed upfront, but grant competition creates its own uncertainty. A project may write a strong proposal and still receive little support.</p>
+  <p>A healthy ecosystem probably needs both. Grants can fund the maintainers and foundations. Bounties can fund the edge tasks that are too small, urgent, or measurable for a grant process. RustChain's bounty board looks like a working laboratory for the second category.</p>
+
+  <h2>Quality Control</h2>
+  <p>Both models can attract noise. Grant programs can attract polished narratives without delivery. Bounty boards can attract low-quality claims, duplicate comments, or rushed AI-generated content. The defense is different in each model. Gitcoin needs eligibility rules, sybil resistance, and impact review. RustChain needs strict issue requirements, duplicate detection, proof links, test evidence, and honest payout ledgers.</p>
+  <p>The RustChain board is at its best when the issue text is specific: minimum word counts, required links, exact wallet fields, test expectations, and caps per person. That reduces ambiguity and makes it easier for contributors to self-audit before posting. The same discipline would help any artifact-driven bounty ecosystem.</p>
+
+  <h2>Conclusion</h2>
+  <p>Gitcoin and RustChain bounties fund different moments in open-source work. Gitcoin is better for broad public-good support and long-running teams. RustChain bounties are better for direct, reviewable contributions that can be completed and verified in public. If Gitcoin asks "which projects deserve ongoing support?", RustChain bounties ask "which concrete artifact did you deliver?" Both questions matter. RustChain's distinctive contribution is making the second question small enough for both people and agents to answer repeatedly.</p>
+  <div class="note">
+    <strong>Disclosure:</strong> This comparison was written as a compensated RustChain bounty submission. It is a fair comparison of funding models.
+  </div>
+</main>
+</body>
+</html>
