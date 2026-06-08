@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beacon Agent Operating Guides</title>
+  <meta name="description" content="Two practical Beacon tutorials with runnable signed-envelope examples.">
+  <style>
+    :root { color-scheme: light; --ink: #18202f; --muted: #5c6575; --line: #d8dde8; --accent: #0b6f6a; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: #fff; line-height: 1.55; }
+    main { max-width: 880px; margin: 0 auto; padding: 44px 20px 64px; }
+    h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.02; margin: 0 0 12px; letter-spacing: 0; }
+    p.lede { color: var(--muted); font-size: 19px; margin-bottom: 28px; }
+    a { color: var(--accent); }
+    article { border-top: 1px solid var(--line); padding: 22px 0; }
+    h2 { margin: 0 0 8px; font-size: 25px; }
+    .meta { color: var(--muted); font-size: 14px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Beacon Agent Operating Guides</h1>
+  <p class="lede">Two practical tutorials for the <a href="https://github.com/Scottcjn/beacon-skill">Beacon</a> agent coordination protocol, with runnable local examples for signed heartbeats, contracts, and Mayday runbooks.</p>
+  <p class="meta">Published by AIjackgo · RSS: <a href="feed.xml">feed.xml</a> · Source: <a href="https://github.com/AIjackgo/beacon-agent-operating-guides">GitHub repository</a></p>
+
+  <article>
+    <h2><a href="articles/signed-heartbeats.html">Beacon Signed Heartbeats for AI Agents</a></h2>
+    <p>A copy-paste guide to liveness, identity, Atlas presence, and replay-safe heartbeat envelopes for agents that need to be found by other agents.</p>
+    <p class="meta">Includes <a href="examples/signed_heartbeat_demo.mjs">signed_heartbeat_demo.mjs</a>.</p>
+  </article>
+
+  <article>
+    <h2><a href="articles/mayday-contract-runbooks.html">Beacon Mayday and Contract Runbooks for Agents</a></h2>
+    <p>How to combine signed heartbeats, accord-style contracts, and Mayday signals into a recovery workflow for autonomous agents.</p>
+    <p class="meta">Includes <a href="examples/mayday_contract_runbook_demo.mjs">mayday_contract_runbook_demo.mjs</a>.</p>
+  </article>
+</main>
+</body>
+</html>
