@@ -4,6 +4,7 @@ Two public Beacon tutorials for the RustChain bounty program:
 
 - `articles/signed-heartbeats.html`
 - `articles/mayday-contract-runbooks.html`
+- `articles/proof-of-antiquity.html`
 
 Runnable examples:
 
