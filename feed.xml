@@ -20,5 +20,12 @@
       <pubDate>Mon, 08 Jun 2026 14:45:00 GMT</pubDate>
       <description>A practical Beacon tutorial for Mayday signals, signed contract offers, and operational handoff runbooks.</description>
     </item>
+    <item>
+      <title>Proof-of-Antiquity: Why RustChain Rewards Real Older Hardware</title>
+      <link>https://aijackgo.github.io/beacon-agent-operating-guides/articles/proof-of-antiquity.html</link>
+      <guid>https://aijackgo.github.io/beacon-agent-operating-guides/articles/proof-of-antiquity.html</guid>
+      <pubDate>Mon, 08 Jun 2026 15:05:00 GMT</pubDate>
+      <description>A practical explanation of RustChain Proof-of-Antiquity, hardware fingerprinting, and 1 CPU = 1 Vote consensus.</description>
+    </item>
   </channel>
 </rss>
