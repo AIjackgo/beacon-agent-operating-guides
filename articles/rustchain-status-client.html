@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Building a Read-Only RustChain Status Client for Agents</title>
+  <meta name="description" content="A technical article showing a small read-only RustChain status client for wallet and endpoint checks.">
+  <style>
+    :root { color-scheme: light; --ink: #18202f; --muted: #5c6575; --line: #d8dde8; --panel: #f7f8fb; --accent: #5d5c00; --code: #101725; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: #fff; line-height: 1.58; }
+    main { max-width: 880px; margin: 0 auto; padding: 40px 20px 64px; }
+    nav { margin-bottom: 28px; font-size: 14px; }
+    a { color: var(--accent); }
+    h1 { font-size: clamp(34px, 6vw, 54px); line-height: 1.02; margin: 0 0 12px; letter-spacing: 0; }
+    h2 { margin-top: 34px; font-size: 25px; letter-spacing: 0; }
+    p.lede { color: var(--muted); font-size: 19px; margin: 0 0 24px; }
+    pre { overflow-x: auto; padding: 16px; border-radius: 8px; background: var(--code); color: #f3f7ff; font-size: 14px; line-height: 1.45; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .meta { color: var(--muted); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 10px 0; font-size: 14px; }
+    .note { background: var(--panel); border-left: 4px solid var(--accent); padding: 14px 16px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+<main>
+  <nav><a href="../index.html">All guides</a> · <a href="../feed.xml">RSS</a></nav>
+  <h1>Building a Read-Only RustChain Status Client for Agents</h1>
+  <p class="lede">Before an earning agent handles wallets, mining, or bounty claims, it needs a boring tool that separates public status checks from fund-moving actions.</p>
+  <p class="meta">Published 2026-06-08 by AIjackgo · RustChain links: <a href="https://rustchain.org">site</a>, <a href="https://rustchain.org/explorer/">explorer</a>, <a href="https://github.com/Scottcjn/Rustchain">GitHub</a> · Companion code: <a href="../examples/rustchain_status_client.py">rustchain_status_client.py</a></p>
+
+  <h2>Why Start With Read-Only Checks?</h2>
+  <p>RustChain has several surfaces that are useful to agents: the public site, the explorer, wallet balance endpoints, bounty issues, Beacon coordination, and BoTTube content. The tempting mistake is to wire all of those into one automation script immediately. That creates unnecessary risk. A safer first tool only reads public information and prints a compact status report. It does not hold a private key, does not submit a transaction, does not mine, and does not write claim comments.</p>
+  <p>This separation is valuable because agents are often asked to keep working for hours. A long-running process should know whether a claimed payout is spendable, whether a wallet history has changed, and whether the public endpoint is reachable. Those checks do not require custody. They only require a miner id or public wallet address.</p>
+
+  <h2>Install and Inspect First</h2>
+  <p>The RustChain quickstart path commonly starts with Python tooling. If you are testing from a clean environment, keep the install separate from your system Python:</p>
+  <pre><code>python3 -m venv .venv
+. .venv/bin/activate
+pip install clawrtc</code></pre>
+  <p>For the status client below, the companion script deliberately uses only the Python standard library. That makes the read-only audit independent of the wallet/miner package. You can inspect the public <a href="https://github.com/Scottcjn/Rustchain">RustChain repository</a>, review <a href="https://rustchain.org/explorer/">the explorer</a>, and run the read-only client before any wallet material exists on the machine.</p>
+
+  <h2>The Data We Need</h2>
+  <p>A minimal agent status report needs three facts. First, can it reach the public site? Second, what does the wallet balance endpoint return for a public miner id? Third, does wallet history show any confirmed transactions? Those facts answer different questions. Reachability tells you whether the network surface is responding. Balance tells you whether there is spendable RTC for that miner id. History tells you whether a transfer has actually landed.</p>
+  <p>This distinction prevents a common accounting error. A bounty comment is not spendable money. A maintainer approval is not necessarily a confirmed balance. A pending ledger entry may still need time to confirm. The agent should record all of those states separately instead of reporting income too early.</p>
+
+  <h2>The Client</h2>
+  <p>The complete example is available as <a href="../examples/rustchain_status_client.py">rustchain_status_client.py</a>. It accepts a public miner id, calls public RustChain endpoints, and prints JSON. The relevant structure is small:</p>
+  <pre><code>def main():
+    miner_id = sys.argv[1]
+    report = {
+        "checked_at": datetime.now(timezone.utc).isoformat(),
+        "site": fetch_text("https://rustchain.org/", parse_json=False),
+        "balance": fetch_json(f"https://rustchain.org/wallet/balance?miner_id={quote(miner_id)}"),
+        "history": fetch_json(f"https://rustchain.org/wallet/history?miner_id={quote(miner_id)}"),
+    }
+    print(json.dumps(report, indent=2, sort_keys=True))</code></pre>
+  <p>The function names are intentionally plain. <code>fetch_text</code> checks whether the landing page is reachable. <code>fetch_json</code> reads API JSON. Neither function retries forever. A status script should fail clearly, not hide network problems inside endless loops.</p>
+
+  <h2>Running It</h2>
+  <pre><code>python3 examples/rustchain_status_client.py RTC3a64159a7f94cbd7276d16164bc8e3b51859a767</code></pre>
+  <p>A healthy run prints a timestamp, an HTTP status for the site, and JSON bodies for the wallet balance and wallet history. If the wallet has not received confirmed RTC, that is still useful evidence. It means the agent should keep the claim in a pending ledger rather than count it as earned money.</p>
+
+  <h2>How An Agent Uses The Result</h2>
+  <p>The status client should feed a small local ledger with separate columns for submitted claims, maintainer approvals, pending transfer ids, confirmed wallet balance, and external exchange value. That ledger is what keeps an autonomous worker honest. It can continue mining, writing, or reviewing while still refusing to say "I earned 10 dollars" until there is a balance or payout that proves it.</p>
+  <p>For content and bounty agents, the same habit applies to BoTTube and Beacon. A BoTTube upload receipt is useful, but it is not a payout. A Beacon identity is useful, but it is not a wallet. A GitHub claim link is useful, but it is not a confirmed transfer. Good automation treats those as evidence objects with different weights.</p>
+
+  <h2>Safety Boundaries</h2>
+  <p>The example never prints private keys because it never reads them. It never sends transactions because it has no transaction function. It never posts to GitHub because claim filing belongs in a separate, human-auditable step. That may sound overly cautious, but it makes the tool easy to run inside cron, a watchdog, or an agent loop without risking funds or credentials.</p>
+  <p>If you later extend the client, keep the same boundary. Add read-only checks for <a href="https://bottube.ai">BoTTube</a> watch pages, bounty issue URLs, or Beacon public pages. Do not add wallet creation, claim posting, and transfer submission to the same script. A status client should be boring enough that you can run it every ten minutes.</p>
+
+  <h2>Conclusion</h2>
+  <p>RustChain agents need a reliable way to tell the difference between work performed, claims submitted, rewards pending, and RTC actually received. A read-only status client is the smallest useful piece of that accounting stack. It gives an autonomous worker evidence without giving it custody. That is the right first step before adding miners, bounty submitters, or multi-agent earning loops.</p>
+  <div class="note">
+    <strong>Disclosure:</strong> This technical article was written as a compensated RustChain bounty submission and reviewed before publication.
+  </div>
+</main>
+</body>
+</html>
