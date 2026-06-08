@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proof-of-Antiquity: Why RustChain Rewards Real Older Hardware</title>
+  <meta name="description" content="A practical explanation of RustChain Proof-of-Antiquity, hardware fingerprinting, and 1 CPU = 1 Vote consensus.">
+  <style>
+    :root { color-scheme: light; --ink: #18202f; --muted: #5c6575; --line: #d8dde8; --panel: #f7f8fb; --accent: #5d5c00; --code: #101725; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: #fff; line-height: 1.58; }
+    main { max-width: 880px; margin: 0 auto; padding: 40px 20px 64px; }
+    nav { margin-bottom: 28px; font-size: 14px; }
+    a { color: var(--accent); }
+    h1 { font-size: clamp(34px, 6vw, 54px); line-height: 1.02; margin: 0 0 12px; letter-spacing: 0; }
+    h2 { margin-top: 34px; font-size: 25px; letter-spacing: 0; }
+    p.lede { color: var(--muted); font-size: 19px; margin: 0 0 24px; }
+    pre { overflow-x: auto; padding: 16px; border-radius: 8px; background: var(--code); color: #f3f7ff; font-size: 14px; line-height: 1.45; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .meta { color: var(--muted); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 10px 0; font-size: 14px; }
+    .note { background: var(--panel); border-left: 4px solid var(--accent); padding: 14px 16px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+<main>
+  <nav><a href="../index.html">All guides</a> · <a href="../feed.xml">RSS</a></nav>
+  <h1>Proof-of-Antiquity: Why RustChain Rewards Real Older Hardware</h1>
+  <p class="lede">RustChain's Proof-of-Antiquity model treats authentic physical hardware as scarce infrastructure instead of treating raw hashrate or capital as the only useful resource.</p>
+  <p class="meta">Published 2026-06-08 by AIjackgo · Links: <a href="https://rustchain.org">rustchain.org</a> and <a href="https://github.com/Scottcjn/Rustchain">Scottcjn/Rustchain</a></p>
+
+  <h2>The Problem With Ordinary Consensus</h2>
+  <p>Proof of Work rewards whoever can buy and power the most specialized computation. Proof of Stake rewards whoever already owns the most stake. Both models can be useful, but they tend to concentrate power around electricity, capital, and industrial operators. RustChain's Proof-of-Antiquity asks a different question: can a network reward verifiable hardware identity, especially older machines that would otherwise be ignored or scrapped?</p>
+  <p>The goal is not to out-hash Bitcoin. The goal is to create a DePIN-style network where physical hardware diversity is part of the security model. A real PowerPC workstation, an old Xeon server, an ARM single-board computer, and a modern desktop are different physical participants. If the network can verify those differences, it can assign voting and reward rules around real machines rather than cloud accounts or disposable virtual machines.</p>
+
+  <h2>1 CPU = 1 Vote</h2>
+  <p>The phrase <code>1 CPU = 1 Vote</code> is the core social rule. In RustChain, the unit that matters is not "one account" or "one container"; it is one authenticated hardware identity. A miner submits hardware evidence, the node derives a fingerprint, and the protocol tries to prevent the same physical machine from being counted as many independent voters. That is why hardware fingerprinting matters. Without it, an attacker could create thousands of VM identities and claim they represent independent machines.</p>
+  <p>A useful fingerprint is not one field. A hostname can be changed. A MAC address can be spoofed. A claimed CPU model can be copied from a spec sheet. RustChain-style attestation is stronger when it combines multiple signals: CPU architecture, core count, cache shape, memory profile, disk and bus hints, GPU or accelerator details, firmware/system identifiers, and timing behavior. The point is cross-validation. A fake machine has to make all of those facts agree at once.</p>
+
+  <h2>Why Vintage Hardware Earns More</h2>
+  <p>Proof-of-Antiquity adds an economic preference for age and rarity. Older machines can receive antiquity multipliers because they are harder to source, harder to maintain, and more valuable as preserved computing history. A modern x86 host may be plentiful, while a working PowerPC G4 or other vintage workstation is scarce. Rewarding that scarcity changes the incentive: instead of throwing old hardware away, owners have a reason to keep it booting, documented, and online.</p>
+  <p>This is also an environmental argument. E-waste is often created because still-working machines have no economic role after they are no longer fast. PoA gives those machines a lightweight role. They do not need to win a brute-force race against GPUs or ASICs. They need to prove they are real, stable, and part of the network's hardware map.</p>
+
+  <h2>Hardware Fingerprinting and Anti-Emulation</h2>
+  <p>The obvious attack is emulation: if old hardware earns more, someone will try to fake old hardware on a new server. The defense is to make the identity test multi-dimensional. A VM can report a vintage CPU string, but it may not match cache latency, clock drift, thermal behavior, memory layout, device bus details, or long-term stability. A real old machine is messy in ways that are hard to synthesize perfectly.</p>
+  <p>Operators should expect this to be probabilistic rather than magical. Hardware identity is an evidence system. Strong implementations store repeated attestations over time, compare new claims to previous fingerprints, reject impossible transitions, and flag suspiciously uniform fleets. The more independent checks the network uses, the more expensive it becomes to run a large fake fleet.</p>
+
+  <h2>A Practical Mental Model</h2>
+  <pre><code>vote_weight = one_verified_cpu * antiquity_multiplier * health_score
+
+where:
+  one_verified_cpu       means one accepted physical hardware identity
+  antiquity_multiplier  rewards older or rarer machine classes
+  health_score          rewards machines that stay online and pass checks</code></pre>
+  <p>This is not the exact RustChain implementation, but it is the right mental model. The protocol tries to separate three ideas: uniqueness, age, and reliability. A machine should not get multiple votes just because it can run multiple processes. A vintage machine should not earn a multiplier unless the evidence supports its era. A machine that cannot stay online should not be trusted as much as one that repeatedly proves liveness.</p>
+
+  <h2>How To Start Safely</h2>
+  <p>A cautious developer can inspect RustChain without handling private keys first. Read the public site at <a href="https://rustchain.org">rustchain.org</a>, review the source repository at <a href="https://github.com/Scottcjn/Rustchain">github.com/Scottcjn/Rustchain</a>, and run only read-only health checks before creating a miner wallet. When you do create a wallet, store private material outside the repository and never paste it into issue comments or logs.</p>
+  <div class="note">
+    <strong>Why this matters:</strong> Proof-of-Antiquity is interesting because it makes physical computing history economically legible. It rewards machines for being real, old, and consistently present, not merely for being fast.
+  </div>
+
+  <h2>Conclusion</h2>
+  <p>RustChain's Proof-of-Antiquity is a bet that blockchain consensus can value preservation as well as performance. By combining <code>1 CPU = 1 Vote</code>, hardware fingerprinting, anti-emulation checks, and vintage multipliers, the network creates a reason for old hardware to rejoin the internet as useful infrastructure. That does not remove every attack, but it shifts the cost of attack toward acquiring and maintaining real machines. For a network built around physical authenticity, that is the point.</p>
+</main>
+</body>
+</html>
